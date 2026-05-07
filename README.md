@@ -1,116 +1,196 @@
-# Tangkhul AI
+# Tangkhul AI — Neural Language Intelligence
 
-A community-powered pre-training dataset platform to preserve the Tangkhul language (Tibeto-Burman, spoken in Manipur & Nagaland, Northeast India).
+> *Preserving Tangkhul, one word at a time.*
 
-**Stack:** Next.js 14 (web) + Expo (mobile) + Supabase + NVIDIA Nemotron 3 Nano 30B A3B
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-a78bfa.svg)](LICENSE.md)
+[![Community Contributions: Open](https://img.shields.io/badge/Contributions-Open-6ee7b7.svg)](#contributing)
+[![Built With: NVIDIA NIM](https://img.shields.io/badge/Powered%20by-NVIDIA%20NIM-76b900.svg)](https://build.nvidia.com/)
 
-## Monorepo Structure
+---
+
+## 🌱 Why This Exists
+
+The **Tangkhul Naga people** of Manipur, northeast India, speak a language that is over a thousand years old — rich with tonal expression, proverbs, kinship terms, and oral history that has never been fully digitized.
+
+As of 2026, the **Tangkhul language has almost zero presence** in any major AI system. It is not in GPT, not in Gemini, not in any voice assistant. If you type "translate to Tangkhul" anywhere, you get nothing useful.
+
+This project exists to change that.
+
+**Tangkhul AI** is a community-powered **pre-training dataset collection platform**. Every English ↔ Tangkhul word pair contributed here goes into a structured training corpus. Once we collect enough high-quality, categorized pairs, this dataset will be used to fine-tune a language model that *truly understands Tangkhul* — so future generations can use AI in their mother tongue, not just English.
+
+This is not just a translator. It is a **language preservation movement**.
+
+---
+
+## 🎯 What We're Building Towards
+
+The collected dataset will power:
+
+| Target | Description |
+|---|---|
+| 🤖 **AI Fine-Tuning** | A custom Tangkhul language model via NVIDIA NIM / HuggingFace |
+| 📱 **Mobile Keyboard** | Tangkhul autocomplete & swipe keyboard for Android/iOS |
+| 🔍 **Search Integration** | Tangkhul-aware search for local platforms |
+| 🎙️ **Voice Assistant** | "Hey AI, speak in Tangkhul" — a real, accurate response |
+| 📖 **Digital Dictionary** | The first community-verified Tangkhul digital dictionary |
+| 🌐 **Web Localization** | Making websites readable in Tangkhul |
+
+---
+
+## ✨ Current Features
+
+### 🔄 Bidirectional Translation
+- **Tangkhul → English** and **English → Tangkhul**
+- Powered by NVIDIA NIM (nemotron model) with few-shot prompting
+- Confidence scoring and grammar note output
+
+### ✍️ Community Teaching Panel
+- Anyone can submit a word or phrase pair — **no login required**
+- Optional category tagging: Days, Months, Slangs, Food, Proverbs, Greetings, etc.
+- Optional grammar notes for linguistic accuracy
+- All pairs stored in `data/learned_pairs.json`
+
+### 📊 Live Stats Dashboard
+- Learned pairs count, translation attempts, confidence level, top categories
+
+### ⚡ Auto Fine-Tuning (Every 15 Hours)
+- The system automatically re-ranks learned pairs by usage frequency
+- Higher-frequency pairs are promoted to the top of the few-shot prompt context
+- This means the AI continuously improves as the community contributes
+
+### 📱 Progressive Web App (PWA)
+- Install directly to your phone's home screen
+- Works offline for basic functions
+- App shortcuts for Translate and Teach
+
+### 👥 Contributor Registry
+- Leave your name, email or phone, and suggestions
+- You'll be credited in the final dataset release
+- Saved in `data/contributors.json`
+
+### 🔒 Data Security
+- Direct HTTP access to `/data/` is blocked
+- Training JSON files are never exposed via API without authorization
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- NVIDIA NIM API Key (free at [build.nvidia.com](https://build.nvidia.com/))
+
+### Setup
+
+```bash
+# Clone the project
+git clone https://github.com/itsnextgenfounder/tangkhul-ai.git
+cd tangkhul-ai
+
+# Install dependencies
+npm install
+
+# Configure environment
+cp .env.example .env
+# Edit .env and add your NVIDIA_API_KEY
+
+# Start the server
+npm start
+# → App running at http://localhost:3000
+```
+
+### Environment Variables
+
+```env
+NVIDIA_API_KEY=your_key_here
+NVIDIA_MODEL=nvidia/nemotron-3-nano-30b-a3b
+PORT=3000
+```
+
+---
+
+## 📁 Project Structure
 
 ```
 tangkhul-ai/
-├── web/          # Next.js 14 web app (deploy to Vercel)
-│   ├── app/      # Pages and API routes
-│   ├── components/  # Reusable React components
-│   ├── lib/      # Supabase client, Nemotron API
-│   └── ...
-├── mobile/       # Expo React Native app (iOS + Android)
-│   ├── app/      # Expo Router screens
-│   ├── components/  # Native components
-│   ├── lib/      # Supabase client
-│   └── ...
-└── README.md
+├── public/
+│   ├── index.html        # Main UI (glassmorphism, editorial design)
+│   ├── style.css         # Celestial Linguistic System design tokens
+│   ├── app.js            # Frontend logic, translation, teach, history
+│   ├── manifest.json     # PWA manifest
+│   └── sw.js             # Service worker (offline support)
+├── data/
+│   ├── learned_pairs.json   # Community-contributed translation pairs
+│   ├── training_log.json    # Translation history / usage logs
+│   └── contributors.json    # Contributor registry
+├── server.js             # Express API (translate, learn, finetune, contribute)
+├── .env                  # Environment config (not committed)
+├── README.md             # This file
+├── LICENSE.md            # Creative Commons BY-NC 4.0
+└── INTELLECTUAL_PROPERTY.md  # Prior art & IP declaration
 ```
 
-## Setup Instructions
+---
 
-### 1. Supabase
+## 🤝 Contributing
 
-1. Create a Supabase project at [supabase.com](https://supabase.com)
-2. Go to the SQL Editor and run the SQL schema from the prompt (see `SUPABASE DATABASE SCHEMA` section in the full prompt)
-3. Copy your project URL and anon key
+This is an **open community project**. Here's how you can help:
 
-### 2. NVIDIA NIM
+### Add Word Pairs
+Visit the app → **Teach tab** → add a Tangkhul/English pair with a category.
 
-1. Sign up for NVIDIA NIM at [build.nvidia.com](https://build.nvidia.com)
-2. Get your API key for the Nemotron 3 Nano 30B A3B model
+### Suggest Categories
+Have a category idea (e.g., "Traditional Songs", "Farming Terms")? Open an issue or use the Suggestions form in the About drawer.
 
-### 3. Web App
+### Report Mistranslations
+If the AI translates something incorrectly, note the pair and submit a correction via the Teach tab.
 
-```bash
-cd web
-npm install
-cp .env.local.example .env.local
+### Spread the Word
+Share this with Tangkhul speakers, diaspora communities, linguists, and anyone who cares about language preservation.
+
+---
+
+## 📊 Dataset Format
+
+Each learned pair is stored as:
+
+```json
+{
+  "tangkhul": "Nang meikhou ring",
+  "english": "You are beautiful",
+  "grammar": "adjective follows noun",
+  "category": "Greetings & Farewells",
+  "uses": 4,
+  "timestamp": "2026-05-06T03:00:00.000Z"
+}
 ```
 
-Fill in `.env.local`:
+The `uses` field is incremented when this pair is used in a successful translation — driving the fine-tune re-ranking.
 
-| Variable | Description |
-|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anon key |
-| `NVIDIA_API_KEY` | Your NVIDIA NIM API key |
-| `AUTOTUNE_SECRET` | Random string for auto-tune cron protection |
-| `RESEND_API_KEY` | (Optional) For email notifications |
+---
 
-Run development server:
+## 🧠 Technical Notes
 
-```bash
-npm run dev
-```
+- **Translation Engine**: NVIDIA NIM with few-shot prompting using learned pairs
+- **Fine-Tune Strategy**: Frequency-based re-ranking (not gradient descent) — the top 20 most-used pairs are injected into every prompt as examples
+- **Storage**: File-based JSON (suitable for community scale; MongoDB/Supabase recommended for production scale)
+- **PWA**: Web App Manifest + Service Worker for home screen install + offline access
 
-### 4. Mobile App
+---
 
-```bash
-cd mobile
-npm install
-cp .env.example .env
-```
+## 🙏 Credits
 
-Fill in `.env`:
+**Developer:** Jihal Shimray (NextGen Founder)
+Instagram: [@itsnextgenfounder](https://www.instagram.com/itsnextgenfounder)
 
-| Variable | Description |
-|---|---|
-| `EXPO_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
-| `EXPO_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anon key |
-| `EXPO_PUBLIC_NVIDIA_API_KEY` | Your NVIDIA NIM API key |
+*Built with deep respect for the Tangkhul people and their language — may every word preserved here carry forward what centuries have shaped.*
 
-Run the app:
+---
 
-```bash
-npx expo start
-```
+## 📄 License
 
-Use the Expo Go app on your phone to scan the QR code, or press `a` for Android / `i` for iOS simulator.
+This project's **code** is licensed under [MIT](LICENSE.md).
 
-### 5. Vercel Deployment
+The **translation dataset** (`data/learned_pairs.json`) is licensed under [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/) — free to use for research and preservation, not for commercial resale.
 
-```bash
-cd web
-npx vercel
-```
-
-Set all environment variables in Vercel dashboard. The `vercel.json` includes a cron job that calls `/api/autotune` every 12 hours.
-
-## Features
-
-- **Word Teacher** — Contribute Tangkhul words, phrases, and grammar to the dataset
-- **AI Chat Trainer** — Chat with Tangkhul Kasar and correct its responses
-- **Translation Tool** — English → Tangkhul translation using community data + AI
-- **Dataset Showcase** — Browse, search, and export the community dataset
-- **Contributor Wall** — Leave your mark on this preservation project
-- **Model Evolution Dashboard** — Watch the AI grow with every contribution
-- **Tangkhul Keyboard** — Special character input (Ā, A̲, ā, a̲) on web and mobile
-
-## Design System
-
-- Primary: `#0f1a12` (deep forest night)
-- Secondary: `#1a2e1e` (forest green)
-- Card: `#1e3523`
-- Gold accent: `#c9a84c`
-- Text: `#f0ead8` (warm cream)
-- Tangkhul text: 1.2x size, weight 500
-- "Tangkhul" brand word in gold
-
-## License
-
-This project is open source and built with love for the Tangkhul people. Kadü.
+See [INTELLECTUAL_PROPERTY.md](INTELLECTUAL_PROPERTY.md) for the full IP and prior art declaration.
