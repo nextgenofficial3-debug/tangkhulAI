@@ -39,11 +39,11 @@ export default function ChatPage() {
       .then(({ count }) => setCorrectionsToday(count ?? 0));
 
     Promise.all([
-      supabase.from("learned_pairs").select("*", { count: "exact", head: true }),
+      supabase.from("words").select("*", { count: "exact", head: true }),
       supabase.from("chat_corrections").select("*", { count: "exact", head: true }),
-    ]).then(([learnedPairs, chatCorrections]) => {
+    ]).then(([wordsRes, chatCorrections]) => {
       setStats({
-        words: learnedPairs.count ?? 0,
+        words: wordsRes.count ?? 0,
         corrections: chatCorrections.count ?? 0,
       });
     });

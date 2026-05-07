@@ -14,7 +14,7 @@ interface Contributor {
 export default function ContributorsScreen() {
   const [contributors, setContributors] = useState<Contributor[]>([]);
   const [name, setName] = useState("");
-  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
   const [region, setRegion] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -37,19 +37,20 @@ export default function ContributorsScreen() {
     setSubmitting(true);
     const { error } = await supabase.from("contributors").insert({
       name: name.trim(),
-      contact: contact.trim() || null,
+      contact: email.trim() || null,
       region: region.trim() || null,
+      email_consent: email.trim() ? true : false,
     });
     if (error) {
       Alert.alert("Error", error.message);
     } else {
       Alert.alert("Thank you!", "Your mark has been left on this project.");
       setContributors((prev) => [
-        { id: "", name: name.trim(), contact: contact.trim() || undefined, region: region.trim() || undefined, created_at: new Date().toISOString() },
+        { id: "", name: name.trim(), contact: email.trim() || undefined, region: region.trim() || undefined, created_at: new Date().toISOString() },
         ...prev,
       ]);
       setName("");
-      setContact("");
+      setEmail("");
       setRegion("");
     }
     setSubmitting(false);
@@ -92,7 +93,7 @@ export default function ContributorsScreen() {
           <View style={styles.formCard}>
             <Text style={styles.formTitle}>Leave Your Mark</Text>
             <TextInput style={styles.input} value={name} onChangeText={setName} placeholder="Your name *" placeholderTextColor="#a89f85" />
-            <TextInput style={styles.input} value={contact} onChangeText={setContact} placeholder="Contact (optional)" placeholderTextColor="#a89f85" />
+            <TextInput style={styles.input} value={email} onChangeText={setEmail} placeholder="Email address" placeholderTextColor="#6b8a6e" keyboardType="email-address" autoCapitalize="none" />
             <TextInput style={styles.input} value={region} onChangeText={setRegion} placeholder="Village / District / Region (optional)" placeholderTextColor="#a89f85" />
             <TouchableOpacity style={styles.submitBtn} onPress={handleSubmit} disabled={submitting || !name.trim()}>
               <Text style={styles.submitText}>{submitting ? "Saving..." : "Leave Your Mark →"}</Text>

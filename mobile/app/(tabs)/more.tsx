@@ -7,6 +7,7 @@ const items = [
   { route: "/more/contributors", icon: "users" as const, label: "Contributors", desc: "Community wall of honor" },
   { route: "/more/evolution", icon: "rocket" as const, label: "Evolution", desc: "Model training progress" },
   { route: "/more/translate", icon: "globe" as const, label: "Translate", desc: "English → Tangkhul translation" },
+  { route: "/more/corrections", icon: "check-circle" as const, label: "Corrections", desc: "All AI corrections made by the community" },
 ];
 
 export default function MoreScreen() {

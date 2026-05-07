@@ -112,11 +112,12 @@ export default function ContributorsPage() {
           </div>
           <div>
             <label className="block text-sm text-[#a89f85] mb-1">
-              Contact <span className="text-xs">(email, phone, or social — optional)</span>
+              Email <span className="text-xs">(optional — for Phase 2 updates)</span>
             </label>
             <input
               value={contact}
               onChange={(e) => setContact(e.target.value)}
+              type="email"
               className="w-full bg-[#0f1a12] border border-[#2d4a33] rounded-lg px-4 py-2.5 text-[#f0ead8] focus:border-[#c9a84c] outline-none"
             />
           </div>
