@@ -1,0 +1,8 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="114" fill="#3B1FA8"/>
+  <rect width="512" height="512" rx="114" fill="#4C2EC4" opacity="0.5"/>
+  <text x="256" y="234" text-anchor="middle" font-family="'Inter', 'SF Pro Display', sans-serif"
+    font-size="148" font-weight="700" fill="#FFFFFF" letter-spacing="-3">T.AI</text>
+  <text x="256" y="336" text-anchor="middle" font-family="'Inter', sans-serif"
+    font-size="38" font-weight="400" fill="#C4B5FD" letter-spacing="9">TANGKHUL</text>
+</svg>

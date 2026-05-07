@@ -1,0 +1,29 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Next.js
+.next/
+out/
+build/
+
+# Expo / React Native
+.expo/
+dist/
+ios/
+android/
+*.jks
+*.keystore
+
+# Mac
+.DS_Store
+
+# Misc
+coverage/
+.vercel

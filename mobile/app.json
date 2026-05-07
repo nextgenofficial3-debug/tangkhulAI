@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "Tangkhul AI",
+    "slug": "tangkhul-ai",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "tangkhul-ai",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "backgroundColor": "#0f1a12"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.exholding.tangkhulaai",
+      "icon": "./assets/images/icon.png"
+    },
+    "android": {
+      "package": "com.exholding.tangkhulai",
+      "icon": "./assets/images/icon.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#3B1FA8"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/icon.png"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d2001f10-2244-44d9-9012-7f523ea0eaed"
+      }
+    }
+  }
+}
