@@ -156,7 +156,7 @@ Each learned pair is stored as:
 
 ```json
 {
-  "tangkhul": "Nang meikhou ring",
+  "tangkhul": "Na Ngala mathai",
   "english": "You are beautiful",
   "grammar": "adjective follows noun",
   "category": "Greetings & Farewells",
